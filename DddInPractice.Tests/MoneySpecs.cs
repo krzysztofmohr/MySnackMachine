@@ -127,9 +127,7 @@ namespace DddInPractice.Tests
             Action action = () =>
             {
                 Money money = money1 - money2;
-            };
-
-            action();
+            };            
 
             action.ShouldThrow<InvalidOperationException>();
         }
