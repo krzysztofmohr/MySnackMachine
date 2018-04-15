@@ -1,4 +1,4 @@
-﻿     using System;
+﻿using System;
 
 namespace DddInPractice.Logic
 {
@@ -103,5 +103,15 @@ namespace DddInPractice.Logic
                 return hashCode;
             }
         }
+
+        public override string ToString()
+        {
+            if (Amount < 1)
+                return $"cent{(Amount * 100):0}";
+
+
+            return $"dollar{Amount:0.00}";
+        }
     }
 }
+
