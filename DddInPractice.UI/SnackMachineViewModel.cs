@@ -10,12 +10,25 @@ namespace DddInPractice.UI
         public override string Caption => "Snack Machine";
         public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
 
+        private string _message = "";
+
+        public string Message
+        {
+            get { return _message; }
+            private set
+            {
+                _message = value;
+                Notify();
+            }
+        }
+
         public Command InsertCentCommand { get; private set; }
         public Command InsertTenCentCommand { get; private set; }
         public Command InsertQuarterCommand { get; private set; }
         public Command InsertDollarCommand { get; private set; }
         public Command InsertFiveDollarCommand { get; private set; }
         public Command InsertTwentyDollarCommand { get; private set; }
+        public Command ReturnMoneyCommand { get; private set; }
 
         public SnackMachineViewModel(SnackMachine snackMachine)
         {
@@ -27,12 +40,21 @@ namespace DddInPractice.UI
             InsertDollarCommand = new Command(() => InsertMoney(Money.Dollar));
             InsertFiveDollarCommand = new Command(() => InsertMoney(Money.FiveDollar));
             InsertTwentyDollarCommand = new Command(() => InsertMoney(Money.TwentyDollar));
+            ReturnMoneyCommand = new Command(ReturnMoney);
+        }
+
+        private void ReturnMoney()
+        {
+            _snackMachine.ReturnMoney();
+            Notify("MoneyInTransaction");
+            Message = $"You have retruned money";
         }
 
         private void InsertMoney(Money money)
         {
             _snackMachine.InsertMoney(money);
             Notify("MoneyInTransaction");
+            Message = $"You have inserted {money}";
         }
     }
 }
