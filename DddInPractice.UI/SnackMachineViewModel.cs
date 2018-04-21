@@ -9,6 +9,7 @@ namespace DddInPractice.UI
         private readonly SnackMachine _snackMachine;
         public override string Caption => "Snack Machine";
         public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
+        public Money MoneyInside => _snackMachine.MoneyInside + _snackMachine.MoneyInTransaction;
 
         private string _message = "";
 
@@ -29,6 +30,7 @@ namespace DddInPractice.UI
         public Command InsertFiveDollarCommand { get; private set; }
         public Command InsertTwentyDollarCommand { get; private set; }
         public Command ReturnMoneyCommand { get; private set; }
+        public Command BuySnackCommand { get; private set; }
 
         public SnackMachineViewModel(SnackMachine snackMachine)
         {
@@ -41,20 +43,32 @@ namespace DddInPractice.UI
             InsertFiveDollarCommand = new Command(() => InsertMoney(Money.FiveDollar));
             InsertTwentyDollarCommand = new Command(() => InsertMoney(Money.TwentyDollar));
             ReturnMoneyCommand = new Command(ReturnMoney);
+            BuySnackCommand = new Command(() => BuySnack());
+        }
+
+        private void BuySnack()
+        {
+            _snackMachine.BuySnack();
+            NotifyClient("You have bought a snack");
         }
 
         private void ReturnMoney()
         {
             _snackMachine.ReturnMoney();
-            Notify("MoneyInTransaction");
-            Message = $"You have retruned money";
+            NotifyClient($"You have retruned money");
         }
 
-        private void InsertMoney(Money money)
+        private void InsertMoney(Money coinOrNote)
         {
-            _snackMachine.InsertMoney(money);
-            Notify("MoneyInTransaction");
-            Message = $"You have inserted {money}";
+            _snackMachine.InsertMoney(coinOrNote);
+            NotifyClient($"You have inserted {coinOrNote}");
+        }
+
+        private void NotifyClient(string message)
+        {
+            Message = message;
+            Notify(nameof(MoneyInTransaction));
+            Notify(nameof(MoneyInside));
         }
     }
 }
