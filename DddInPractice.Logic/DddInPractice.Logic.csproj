@@ -62,6 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SessionFactory.cs" />
+    <Compile Include="SnackMachineMap.cs" />
     <Compile Include="ValueObject.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Money.cs" />
