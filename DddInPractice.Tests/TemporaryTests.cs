@@ -14,7 +14,7 @@ namespace DddInPractice.Tests
         [Fact]
         public void Test()
         {
-            SessionFactory.Init(@"Server=.;Database=DDDInPractice;TrustedConnection=True");
+            SessionFactory.Init(@"Server=.;Database=DDDInPractice;Trusted_Connection=True");
 
             using (var session = SessionFactory.OpenSession())
             {
