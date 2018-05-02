@@ -4,7 +4,7 @@
     {
         public App()
         {
-            //Initer.Init(@"Server=.;Database=DddInPractice;Trusted_Connection=true");
+            SessionFactory.Init(@"Server=.;Database=DddInPractice;Trusted_Connection=true");
         }
     }
 }

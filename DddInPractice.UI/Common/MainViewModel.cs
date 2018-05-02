@@ -6,8 +6,15 @@ namespace DddInPractice.UI.Common
     public class MainViewModel : ViewModel
     {
         public MainViewModel()
-        {            
-            var viewModel = new SnackMachineViewModel(new SnackMachine());
+        {
+            SnackMachine machine;
+
+            using (ISession session = SessionFactory.OpenSession())
+            {
+                machine = session.Get<SnackMachine>(1L);
+            }
+
+            var viewModel = new SnackMachineViewModel(machine);
             _dialogService.ShowDialog(viewModel);
         }
     }

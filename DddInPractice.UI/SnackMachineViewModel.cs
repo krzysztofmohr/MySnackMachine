@@ -49,6 +49,14 @@ namespace DddInPractice.UI
         private void BuySnack()
         {
             _snackMachine.BuySnack();
+            using (var session = SessionFactory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.SaveOrUpdate(_snackMachine);
+                    transaction.Commit();
+                }
+            }
             NotifyClient("You have bought a snack");
         }
 
