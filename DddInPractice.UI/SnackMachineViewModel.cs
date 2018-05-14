@@ -43,12 +43,12 @@ namespace DddInPractice.UI
             InsertFiveDollarCommand = new Command(() => InsertMoney(Money.FiveDollar));
             InsertTwentyDollarCommand = new Command(() => InsertMoney(Money.TwentyDollar));
             ReturnMoneyCommand = new Command(ReturnMoney);
-            BuySnackCommand = new Command(() => BuySnack());
+            BuySnackCommand = new Command(() => BuySnack(1));
         }
 
-        private void BuySnack()
+        private void BuySnack(int position)
         {
-            _snackMachine.BuySnack();
+            _snackMachine.BuySnack(position);
             using (var session = SessionFactory.OpenSession())
             {
                 using (var transaction = session.BeginTransaction())

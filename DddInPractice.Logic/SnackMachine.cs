@@ -52,7 +52,7 @@ namespace DddInPractice.Logic
         public virtual void LoadSnacks(Snack snack, int position, int quantity, decimal price)
         {
             var slot = Slots.Single(x => x.Position == position);
-            slot.Snack = snack;
+            slot.Snack = snack; 
             slot.Position = position;
             slot.Quantity = quantity;
             slot.Price = price;
