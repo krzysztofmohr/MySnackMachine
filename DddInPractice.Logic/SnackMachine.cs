@@ -6,11 +6,11 @@ using static DddInPractice.Logic.Money;
 
 namespace DddInPractice.Logic
 {
-    public class SnackMachine : Entity
+    public class SnackMachine : AggregateRoot
     {
         public virtual Money MoneyInside { get; protected set; } = None;
         public virtual Money MoneyInTransaction { get; protected set; } = None;
-        public virtual IList<Slot> Slots { get; protected set; }
+        protected virtual IList<Slot> Slots { get; set; }
 
         public SnackMachine()
         {
