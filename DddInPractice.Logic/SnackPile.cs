@@ -10,22 +10,33 @@ namespace DddInPractice.Logic
     {
         public Snack Snack { get; }
         public int Quantity { get; }
-        public int Position { get; }
+        public decimal Price { get; }
 
         private SnackPile() {}
 
-        public SnackPile(Snack snack, int quantity, int position) : this()
+        public SnackPile(Snack snack, int quantity, decimal price) : this()
         {
+            if(quantity < 0)
+                throw new InvalidOperationException();
+
+            if (price < 0)
+                throw new InvalidOperationException();
+
             Snack = snack;
             Quantity = quantity;
-            Position = position;
+            Price = price;
         }
-         
+
+        public SnackPile SubtractOne()
+        {
+            return new SnackPile(Snack, Quantity - 1, Price);
+        }
+
         protected override bool EqualsCore(SnackPile other)
         {
             return Snack == other.Snack
                    && Quantity == other.Quantity
-                   && Position == other.Position;
+                   && Price == other.Price;
         }
 
         protected override int GetHashCodeCore()
@@ -34,7 +45,7 @@ namespace DddInPractice.Logic
             {
                 var hashcode = Snack.GetHashCode();
                 hashcode = (hashcode * 397) ^ Quantity;
-                hashcode = (hashcode * 397) ^ Position;
+                hashcode = (hashcode * 397) ^ Price.GetHashCode();
                 return hashcode;
             }
         }

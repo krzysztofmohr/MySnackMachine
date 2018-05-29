@@ -16,12 +16,16 @@ namespace DddInPractice.Logic
         {
             Slots = new List<Slot>
             {
-                new Slot(this, null, 0, 0, 1),
-                new Slot(this, null, 0, 0, 2),
-                new Slot(this, null, 0, 0, 3)
+                new Slot(this, 1),
+                new Slot(this, 2),
+                new Slot(this, 3)
             };
         }
 
+        public SnackPile GetSnackPile(int position)
+        {
+            return Slots.Single(s => s.Position == position).SnackPile;
+        }
 
         public virtual void InsertMoney(Money money)
         {
@@ -43,19 +47,16 @@ namespace DddInPractice.Logic
         public virtual void BuySnack(int position)
         {
             var slot = Slots.Single(x => x.Position == position);
-            slot.Quantity--;
+            slot.SnackPile = slot.SnackPile.SubtractOne();
 
             MoneyInside += MoneyInTransaction;
             MoneyInTransaction = None;
         }
 
-        public virtual void LoadSnacks(Snack snack, int position, int quantity, decimal price)
+        public virtual void LoadSnacks(int position, SnackPile snackPile)
         {
             var slot = Slots.Single(x => x.Position == position);
-            slot.Snack = snack; 
-            slot.Position = position;
-            slot.Quantity = quantity;
-            slot.Price = price;
+            slot.SnackPile = snackPile;
         }        
     }
 }
