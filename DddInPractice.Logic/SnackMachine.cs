@@ -47,6 +47,8 @@ namespace DddInPractice.Logic
 
         public virtual void ReturnMoney()
         {
+            Money moneyToReturn = MoneyInside.Allocate(MoneyInTransaction);
+            MoneyInside -= moneyToReturn;
             MoneyInTransaction = 0;
         }
 
@@ -56,7 +58,9 @@ namespace DddInPractice.Logic
             if(slot.SnackPile.Price > MoneyInTransaction) throw new InvalidOperationException();
 
             slot.SnackPile = slot.SnackPile.SubtractOne();
-            
+
+            Money change = MoneyInside.Allocate(MoneyInTransaction - slot.SnackPile.Price);
+            MoneyInside -= change;            
             MoneyInTransaction = 0;
         }
 
