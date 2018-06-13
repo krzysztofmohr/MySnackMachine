@@ -84,6 +84,7 @@ namespace DddInPractice.Tests
         {
             var snackMachine = new SnackMachine();
             snackMachine.LoadMoney(Dollar);
+
             snackMachine.InsertMoney(Quarter);
             snackMachine.InsertMoney(Quarter);
             snackMachine.InsertMoney(Quarter);
@@ -107,6 +108,18 @@ namespace DddInPractice.Tests
 
             snackMachine.MoneyInside.Amount.Should().Be(1.5m);
             snackMachine.MoneyInTransaction.Should().Be(0);
-        }        
+        }
+
+        [Fact]
+        public void Cannot_buy_snack_if_not_enough_change()
+        {
+            var snackMachine = new SnackMachine();
+            snackMachine.LoadSnacks(1, new SnackPile(new Snack("some snack"), 1, 0.5m));            
+
+            snackMachine.InsertMoney(Dollar);
+            Action action = () => snackMachine.BuySnack(1);
+
+            action.ShouldThrow<NotImplementedException>();
+        }
     }
 }
