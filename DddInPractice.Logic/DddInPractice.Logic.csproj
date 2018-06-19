@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AggregateRoot.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="SessionFactory.cs" />
     <Compile Include="Slot.cs" />
     <Compile Include="Snack.cs" />
