@@ -22,7 +22,7 @@ namespace DddInPractice.Logic
             };
         }
 
-        public SnackPile GetSnackPile(int position)
+        public virtual SnackPile GetSnackPile(int position)
         {
             return Slots.Single(s => s.Position == position).SnackPile;
         }
