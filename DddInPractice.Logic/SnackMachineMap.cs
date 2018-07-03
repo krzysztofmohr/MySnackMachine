@@ -19,7 +19,7 @@ namespace DddInPractice.Logic
                 y.Map(x => x.TwentyDollarCount);
             });
 
-            HasMany<Slot>(Reveal.Member<SnackMachine>("Slots")).Not.LazyLoad();
+            HasMany<Slot>(Reveal.Member<SnackMachine>("Slots")).Cascade.SaveUpdate().Not.LazyLoad();
         }
     }
 }

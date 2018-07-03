@@ -1,4 +1,6 @@
-﻿namespace DddInPractice.Logic
+﻿using static DddInPractice.Logic.Snack;
+
+namespace DddInPractice.Logic
 {
     public class Slot : Entity
     {
@@ -12,7 +14,7 @@
         {
             SnackMachine = snackMachine;           
             Position = position;
-            SnackPile = new SnackPile(null, 0, 0m);
+            SnackPile = SnackPile.Empty;            
         }
     }
 }

@@ -17,6 +17,11 @@ namespace DddInPractice.Tests
             SessionFactory.Init(@"Server=.;Database=DddInPractice;Trusted_Connection=True");
             var repository = new SnackMachineRepository();
             var snackMachine = repository.GetById(1);
+            snackMachine.InsertMoney(Money.Dollar);
+            snackMachine.InsertMoney(Money.Dollar);
+            snackMachine.InsertMoney(Money.Dollar);
+            snackMachine.BuySnack(1);
+            repository.Save(snackMachine);
         }
     }
 }
