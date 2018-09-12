@@ -1,4 +1,5 @@
-﻿using DddInPractice.Logic;
+﻿using System.Collections.Generic;
+using DddInPractice.Logic;
 using DddInPractice.UI.Common;
 using NHibernate;
 
@@ -7,12 +8,17 @@ namespace DddInPractice.UI
     public class SnackMachineViewModel : ViewModel
     {
         private readonly SnackMachine _snackMachine;
+
         public override string Caption => "Snack Machine";
         public string MoneyInTransaction => _snackMachine.MoneyInTransaction.ToString();
         public Money MoneyInside => _snackMachine.MoneyInside;
 
-        private string _message = "";
+        //public IReadOnlyList<SnackPileViewModel> Piles
+        //{
+        //    throw new No
+        //}
 
+        private string _message = "";
         public string Message
         {
             get { return _message; }

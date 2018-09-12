@@ -27,6 +27,11 @@ namespace DddInPractice.Logic
             return Slots.Single(s => s.Position == position).SnackPile;
         }
 
+        public virtual IReadOnlyList<SnackPile> GetAllSnackPiles()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void LoadMoney(Money money)
         {
             MoneyInside += money;
